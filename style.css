@@ -1,0 +1,83 @@
+/* Overall Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff8e1; /* Light golden background */
+  text-align: center;
+  padding: 20px;
+  font-weight: bold; /* Make all text bold */
+}
+
+/* Container Styling */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fffdf5;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ffd700; /* Golden border */
+}
+
+/* Heading Styling */
+h1 {
+  color: #b8860b; /* Dark golden color */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Button Section Styling */
+.button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button {
+  background: linear-gradient(45deg, #ffd700, #ffcc00);
+  color: #333;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background 0.3s ease;
+  width: 200px; /* Adjust button width */
+}
+
+button:hover {
+  background: linear-gradient(45deg, #ffcc00, #e6b800);
+}
+
+button:focus {
+  outline: none;
+  border: 2px solid #ffcc00;
+}
+
+/* Fake Withdrawal Message */
+#fakeWithdrawalMsg {
+  margin-top: 20px;
+  font-weight: bold;
+  color: red;
+}
+
+/* Balance Display Styling */
+#balance {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #b8860b;
+}
+
+/* Referral Section Styling */
+#referralSection {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #b8860b;
+}
+
+/* Button for withdrawal page, referral page, etc */
+button {
+  margin-top: 10px;
+}
