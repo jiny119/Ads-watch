@@ -1,0 +1,65 @@
+// Load balance from localStorage
+let balance = parseFloat(localStorage.getItem('balance')) || 0.00;
+updateBalanceDisplay();
+
+// Ad videos list (for ad.html)
+const adVideos = [
+  "https://youtube.com/shorts/7Zy6upTm-EI?si=-AlXccyaCYUCsXAb",
+  "https://youtube.com/shorts/mjhfzYtbfss?si=QZzJt0Kws8cNsGov",
+  "https://youtu.be/EfdvmBgWEvE?si=LNmqN8cbpqvNXDsP"
+];
+
+// Function: Update balance on page
+function updateBalanceDisplay() {
+  const balanceElement = document.getElementById('balance');
+  if (balanceElement) {
+    balanceElement.innerText = `$${balance.toFixed(2)}`;
+  }
+}
+
+// Function: Watch Ad
+function watchAd() {
+  const randomAd = adVideos[Math.floor(Math.random() * adVideos.length)];
+  window.open(randomAd, '_blank');
+
+  balance += 0.15;
+  localStorage.setItem('balance', balance.toFixed(2));
+  updateBalanceDisplay();
+}
+
+// Function: Redirect to another page
+function goToPage(page) {
+  window.location.href = page;
+}
+
+// Function: Theme Change
+function toggleTheme() {
+  const body = document.body;
+  if (body.style.backgroundColor === 'black') {
+    body.style.backgroundColor = '#fff8e1'; // light golden
+    body.style.color = 'black';
+  } else {
+    body.style.backgroundColor = 'black';
+    body.style.color = 'white';
+  }
+}
+
+// Function: Language Change (Dummy)
+function changeLanguage() {
+  alert("Language changed! (Demo)");
+}
+
+// Function: Share Button
+function shareApp() {
+  alert("Share this link: https://goldtask.vercel.app");
+}
+
+// Function: Withdrawal Request
+function requestWithdrawal() {
+  if (balance >= 50) {
+    document.getElementById('fakeWithdrawalMsg').style.display = 'block';
+    alert("Withdrawal requested! Processing in 3 days.");
+  } else {
+    alert("Minimum $50 required to withdraw.");
+  }
+}
