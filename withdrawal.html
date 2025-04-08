@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Withdrawal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Withdraw Earnings</h1>
+    <p>Current Balance: <span id="withdrawBalance">$0.00</span></p>
+    <p>Your Referrals: <span id="referralCount">0</span></p>
+    <p>Minimum Requirement: $50 & 10 Referrals</p>
+
+    <button id="withdrawRequestBtn">Request Withdrawal</button>
+
+    <div id="withdrawMsg" style="display: none; margin-top: 20px; color: green;">
+      Withdrawal request sent! You'll receive payment in 3 days.
+    </div>
+  </div>
+
+  <script>
+    // Balance aur referrals localStorage se load karo
+    let balance = parseFloat(localStorage.getItem('balance')) || 0.00;
+    let referralsCount = parseInt(localStorage.getItem('referralsCount')) || 0;
+
+    document.getElementById("withdrawBalance").innerText = `$${balance.toFixed(2)}`;
+    document.getElementById("referralCount").innerText = referralsCount;
+
+    document.getElementById("withdrawRequestBtn").addEventListener("click", function () {
+      if (balance >= 50) {
+        if (referralsCount >= 10) {
+          const method = prompt("Choose withdrawal method: JazzCash, EasyPaisa, Payoneer");
+          if (["JazzCash", "EasyPaisa", "Payoneer"].includes(method)) {
+            document.getElementById("withdrawMsg").style.display = "block";
+          } else {
+            alert("Invalid method. Please type: JazzCash, EasyPaisa or Payoneer.");
+          }
+        } else {
+          alert("You need at least 10 referrals to withdraw.");
+        }
+      } else {
+        alert("You need at least $50 to withdraw.");
+      }
+    });
+  </script>
+</body>
+</html>
