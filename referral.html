@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Referral - GoldTask</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .referral-btn {
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      color: #000;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #referralCode {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #b8860b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Referral System</h1>
+
+    <p>Your Referral Code:</p>
+    <p id="referralCode">GOLD123</p>
+
+    <button class="referral-btn" onclick="copyReferral()">Copy Referral Link</button>
+
+    <h3>You have 10 referrals</h3>
+  </div>
+
+  <script>
+    function copyReferral() {
+      const link = "https://goldtask.vercel.app/?ref=GOLD123";
+      navigator.clipboard.writeText(link).then(() => {
+        alert("Referral link copied!");
+      });
+    }
+  </script>
+</body>
+</html>
