@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Watch Ads</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8e1;
+      text-align: center;
+      padding: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fffdf5;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      border: 2px solid #ffd700;
+    }
+
+    h1 {
+      color: #b8860b;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ffd700, #ffcc00);
+      color: #333;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #ffcc00, #e6b800);
+    }
+
+    #balance {
+      margin-top: 20px;
+      font-size: 18px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Watch Ads & Earn</h1>
+    <p>Click the button below to watch an ad and earn $0.15!</p>
+    <button onclick="watchAd()">Watch Ad</button>
+    <p id="balance">Your Earning: $0.00</p>
+  </div>
+
+  <script>
+    const adLinks = [
+      "https://youtube.com/shorts/7Zy6upTm-EI?si=-AlXccyaCYUCsXAb",
+      "https://youtube.com/shorts/mjhfzYtbfss?si=QZzJt0Kws8cNsGov",
+      "https://youtu.be/EfdvmBgWEvE?si=LNmqN8cbpqvNXDsP"
+    ];
+
+    // Load existing earning
+    let earning = parseFloat(localStorage.getItem('adEarning')) || 0.00;
+    document.getElementById('balance').innerText = `Your Earning: $${earning.toFixed(2)}`;
+
+    function watchAd() {
+      const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
+      window.open(randomAd, '_blank');
+
+      // Add $0.15 to earning
+      earning += 0.15;
+      localStorage.setItem('adEarning', earning.toFixed(2));
+      document.getElementById('balance').innerText = `Your Earning: $${earning.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
