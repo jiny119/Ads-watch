@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - GoldTask</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body.dark-mode {
+      background-color: #1e1e1e;
+      color: white;
+    }
+    .setting-btn {
+      background: linear-gradient(45deg, #ffcc00, #ff9900);
+      color: #000;
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+
+    <button class="setting-btn" onclick="toggleTheme()">Change Theme</button>
+    <button class="setting-btn" onclick="toggleLanguage()">Change Language</button>
+    <button class="setting-btn" onclick="shareApp()">Share App</button>
+
+    <p id="langText">Language: English</p>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function toggleLanguage() {
+      const text = document.getElementById('langText');
+      if (text.innerText.includes('English')) {
+        text.innerText = 'Language: اردو';
+      } else {
+        text.innerText = 'Language: English';
+      }
+    }
+
+    function shareApp() {
+      const dummyLink = "https://goldtask.vercel.app";
+      navigator.clipboard.writeText(dummyLink).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
