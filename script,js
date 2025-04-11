@@ -53,10 +53,18 @@ function changeLanguage() {
 function shareApp() {
   alert("Share this link: https://goldtask.vercel.app");
 }
-// Function to check if the user has watched the video completely
-function completeSurvey() {
-    alert("Congratulations! You've completed the survey and earned coins.");
-    // Here you can add code to increase the user's coin count or take other actions
+// Function to start the survey (Display the video and play it)
+function startSurvey() {
+    // Show the video container
+    document.getElementById('video-container').style.display = 'block';
+    
+    // Change button text after click
+    document.getElementById('complete-survey').textContent = 'Watch the Video and Subscribe';
+    
+    // Redirect after survey is complete (or you can handle completion logic as you need)
+    setTimeout(function() {
+        window.location.href = "survey-complete.html";  // Redirect to the survey-complete page
+    }, 5000);  // Wait for 5 seconds before redirecting (adjust as needed)
 }
 
 // Function: Withdrawal Request
