@@ -27,22 +27,7 @@
   <button onclick="window.location.href='setting.html'">Settings</button>
   <button onclick="copyReferralLink()">Referral</button>
     withdrawal.html
-      <div id="survey-section">
-    <h3>Complete Survey to Earn Coins!</h3>
-    <p>Watch the full video and subscribe to our channel.</p>
-    
-    <!-- YouTube Video Embed -->
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ-mcJyqdBs?autoplay=1" 
-    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    
-    <br>
-    
-    <!-- YouTube Channel Link -->
-    <p>Subscribe to our channel: <a href="https://www.youtube.com/@ToonCraftStudio-f7o" target="_blank">ToonCraftStudio</a></p>
-    
-    <!-- Survey Completion Button -->
-    <button id="complete-survey" onclick="completeSurvey()">Complete Survey</button>
-      </div>
+      <div 
     </div>
        
 
@@ -75,7 +60,24 @@
       if (adData.date !== today) {
         adData = { date: today, count: 0 };
       }
-
+<div id="survey-section" class="survey-section">
+    <h3>Complete Survey to Earn Coins!</h3>
+    <p>Click the button to start the video and subscribe to our channel.</p>
+    
+    <!-- YouTube Video Embed (Initially hidden) -->
+    <div id="video-container" style="display:none;">
+        <iframe id="survey-video" width="560" height="315" src="https://www.youtube.com/embed/NZ-mcJyqdBs?autoplay=1" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    
+    <br>
+    
+    <!-- YouTube Channel Link -->
+    <p>Subscribe to our channel: <a href="https://www.youtube.com/@ToonCraftStudio-f7o" target="_blank">ToonCraftStudio</a></p>
+    
+    <!-- Survey Completion Button -->
+    <button class="survey-btn" id="complete-survey" onclick="startSurvey()">Start Survey</button>
+</div>
       if (adData.count < 10) {
         adData.count++;
         localStorage.setItem("adLimit", JSON.stringify(adData));
