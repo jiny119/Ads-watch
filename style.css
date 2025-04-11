@@ -62,18 +62,18 @@ button:focus {
   font-weight: bold;
   color: red;
 }
-#survey-section {
+.survey-section {
     text-align: center;
     margin-top: 20px;
 }
 
-#survey-section iframe {
+.survey-section iframe {
     width: 100%;
     max-width: 560px;
     height: 315px;
 }
 
-#survey-section button {
+.survey-section .survey-btn {
     background-color: #4CAF50;
     color: white;
     padding: 15px 20px;
@@ -81,9 +81,32 @@ button:focus {
     cursor: pointer;
     font-size: 16px;
     margin-top: 15px;
+    border-radius: 5px;
 }
 
-#survey-section button:hover {
+.survey-section .survey-btn:hover {
+    background-color: #45a049;
+}
+
+.survey-complete-message {
+    text-align: center;
+    padding: 50px;
+}
+
+.survey-complete-message h2 {
+    color: green;
+}
+
+.survey-complete-message button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.survey-complete-message button:hover {
     background-color: #45a049;
 }
 
