@@ -53,6 +53,11 @@ function changeLanguage() {
 function shareApp() {
   alert("Share this link: https://goldtask.vercel.app");
 }
+// Function to check if the user has watched the video completely
+function completeSurvey() {
+    alert("Congratulations! You've completed the survey and earned coins.");
+    // Here you can add code to increase the user's coin count or take other actions
+}
 
 // Function: Withdrawal Request
 function requestWithdrawal() {
