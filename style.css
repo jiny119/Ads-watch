@@ -1,140 +1,111 @@
-/* Overall Body Styling */
+/* General Body Styling */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fff8e1; /* Light golden background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff8e1;
   text-align: center;
   padding: 20px;
-  font-weight: bold; /* Make all text bold */
+  font-weight: bold;
 }
 
-/* Container Styling */
+/* Main Container */
 .container {
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 550px;
+  margin: auto;
   background-color: #fffdf5;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  border: 2px solid #ffd700; /* Golden border */
+  padding: 25px;
+  border-radius: 16px;
+  border: 3px solid #ffd700;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Heading Styling */
+/* Heading */
 h1 {
-  color: #b8860b; /* Dark golden color */
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  color: #b8860b;
+  font-size: 2.7rem;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px #ffd700;
 }
 
-/* Button Section Styling */
-.button-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
+/* All Buttons */
 button {
-  background: linear-gradient(45deg, #ffd700, #ffcc00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ffd700, #ffcc00);
   color: #333;
-  padding: 12px 24px;
+  padding: 14px 24px;
   border: none;
-  border-radius: 8px;
-  margin: 10px;
+  border-radius: 12px;
+  margin: 12px 0;
   cursor: pointer;
   font-weight: bold;
   font-size: 1.1rem;
-  transition: background 0.3s ease;
-  width: 200px; /* Adjust button width */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
 }
 
 button:hover {
-  background: linear-gradient(45deg, #ffcc00, #e6b800);
+  background: linear-gradient(135deg, #ffcc00, #e6b800);
+  transform: scale(1.03);
 }
 
-button:focus {
-  outline: none;
-  border: 2px solid #ffcc00;
+/* Referral Section */
+#referralText {
+  font-weight: bold;
+  color: #a67c00;
+  margin-top: 10px;
+  font-size: 1.1rem;
 }
 
-/* Fake Withdrawal Message */
+#adsLeft {
+  margin-top: 10px;
+  color: #d2691e;
+  font-size: 1rem;
+}
+
+/* Balance Text */
+#balance {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #b8860b;
+}
+
+/* Survey Button Style */
+.survey-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.survey-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Withdrawal Msg */
 #fakeWithdrawalMsg {
   margin-top: 20px;
   font-weight: bold;
   color: red;
 }
-.survey-section {
-    text-align: center;
-    margin-top: 20px;
-}
 
-.survey-section iframe {
-    width: 100%;
-    max-width: 560px;
-    height: 315px;
-}
-
-.survey-section .survey-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px;
-    border-radius: 5px;
-}
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin-top: 50px;
-}
-
-.survey-container {
-    width: 80%;
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.survey-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 20px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.survey-btn:hover {
-    background-color: #45a049;
-}
-
-#video-container {
-    display: none;
-    margin-top: 20px;
-  }
-
-
-/* Balance Display Styling */
-#balance {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #b8860b;
-}
-
-/* Referral Section Styling */
-#referralSection {
+/* Add spacing for sections */
+.section {
   margin-top: 20px;
-  font-size: 1.2rem;
-  color: #b8860b;
 }
 
-/* Button for withdrawal page, referral page, etc */
-button {
-  margin-top: 10px;
-}
+/* Optional icons with emojis (replace with SVG/icons later) */
+button.watch-ads::before { content: "▶️"; }
+button.withdraw::before { content: "💰"; }
+button.dashboard::before { content: "📊"; }
+button.settings::before { content: "⚙️"; }
+button.copy-referral::before { content: "🔗"; }
+button.survey::before { content: "✅"; }
