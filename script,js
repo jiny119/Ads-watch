@@ -53,7 +53,11 @@ function changeLanguage() {
 function shareApp() {
   alert("Share this link: https://goldtask.vercel.app");
 }
-
+// Function to start the survey and show the video
+function startSurvey() {
+    document.getElementById('video-container').style.display = 'block'; // Show video
+    document.querySelector('.survey-btn').textContent = "Watch the Video and Subscribe"; // Update button text
+}
 
 // Function: Withdrawal Request
 function requestWithdrawal() {
