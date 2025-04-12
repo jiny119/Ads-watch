@@ -57,24 +57,36 @@
     <h1>GoldTask</h1>
     <p>Watch ads, earn money, and invite friends!</p>
 
-    <button onclick="openAdPage()">Watch Ads</button>
+    <button onclick="playAd()">Watch Ads</button>
     <button onclick="window.location.href='withdrawal.html'">Withdrawal</button>
     <button onclick="window.location.href='dashboard.html'">Dashboard</button>
     <button onclick="window.location.href='setting.html'">Settings</button>
     <button onclick="copyReferralLink()">Copy Referral Link</button>
-    
+    <button onclick="openSurvey()">Survey</button>
+
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/</span></p>
     <p id="adsLeft"></p>
   </div>
 
-  <script src="script.js"></script>
   <script>
-    function openAdPage() {
+    const adLinks = [
+      "https://youtube.com/shorts/7Zy6upTm-EI?si=VB-zsjITttOnTrIY",
+      "https://youtu.be/trr3AC1jiEk?si=9EvK64Pl_cBguyUU",
+      "https://youtu.be/EfdvmBgWEvE?si=4-KMQ_P-8z21Zzh7",
+      "https://youtube.com/shorts/nPN3DQnrUGw?si=pM_-d7TuurDGjOGX"
+    ];
+
+    function playAd() {
       if (checkAdLimit()) {
-        window.location.href = 'ad.html';
+        const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
+        window.open(randomAd, "_blank");
       } else {
         alert("You have reached today's ad limit. Come back tomorrow!");
       }
+    }
+
+    function openSurvey() {
+      window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
     }
 
     function copyReferralLink() {
