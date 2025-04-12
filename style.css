@@ -83,32 +83,42 @@ button:focus {
     margin-top: 15px;
     border-radius: 5px;
 }
-
-.survey-section .survey-btn:hover {
-    background-color: #45a049;
-}
-
-.survey-complete-message {
+body {
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 50px;
+    background-color: #f4f4f4;
+    margin-top: 50px;
 }
 
-.survey-complete-message h2 {
-    color: green;
+.survey-container {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.survey-complete-message button {
-    padding: 10px 20px;
+.survey-btn {
     background-color: #4CAF50;
     color: white;
+    padding: 15px 20px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    border-radius: 5px;
 }
 
-.survey-complete-message button:hover {
+.survey-btn:hover {
     background-color: #45a049;
 }
+
+#video-container {
+    display: none;
+    margin-top: 20px;
+  }
+
 
 /* Balance Display Styling */
 #balance {
