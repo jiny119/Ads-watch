@@ -21,22 +21,20 @@ function updateBalanceDisplay() {
 function watchAd() {
   const randomAd = adVideos[Math.floor(Math.random() * adVideos.length)];
   window.open(randomAd, '_blank');
-
   balance += 0.15;
   localStorage.setItem('balance', balance.toFixed(2));
   updateBalanceDisplay();
 }
 
-// Function: Redirect to another page
+// Extra Functions (for other pages if needed)
 function goToPage(page) {
   window.location.href = page;
 }
 
-// Function: Theme Change
 function toggleTheme() {
   const body = document.body;
   if (body.style.backgroundColor === 'black') {
-    body.style.backgroundColor = '#fff8e1'; // light golden
+    body.style.backgroundColor = '#fff8e1';
     body.style.color = 'black';
   } else {
     body.style.backgroundColor = 'black';
@@ -44,25 +42,26 @@ function toggleTheme() {
   }
 }
 
-// Function: Language Change (Dummy)
 function changeLanguage() {
   alert("Language changed! (Demo)");
 }
 
-// Function: Share Button
 function shareApp() {
   alert("Share this link: https://goldtask.vercel.app");
 }
-// Function to start the survey and show the video
+
 function startSurvey() {
-    document.getElementById('video-container').style.display = 'block'; // Show video
-    document.querySelector('.survey-btn').textContent = "Watch the Video and Subscribe"; // Update button text
+  const video = document.getElementById('video-container');
+  const btn = document.querySelector('.survey-btn');
+  if (video && btn) {
+    video.style.display = 'block';
+    btn.textContent = "Watch the Video and Subscribe";
+  }
 }
 
-// Function: Withdrawal Request
 function requestWithdrawal() {
   if (balance >= 50) {
-    document.getElementById('fakeWithdrawalMsg').style.display = 'block';
+    document.getElementById('fakeWithdrawalMsg')?.style.display = 'block';
     alert("Withdrawal requested! Processing in 3 days.");
   } else {
     alert("Minimum $50 required to withdraw.");
