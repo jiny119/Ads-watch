@@ -1,71 +1,74 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GoldTask - Earn Daily</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8e1;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: #fffef2;
+      border-radius: 12px;
+      border: 2px solid #ffd700;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #b8860b;
+      margin-bottom: 15px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #ffd700, #ffcc00);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #ffcc00, #e6b800);
+    }
+
+    #referralText {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-  <button onclick="watchAd()">Watch Ad</button>
-<button onclick="goToPage('withdrawal.html')">Withdraw</button>
-<button onclick="goToPage('referral.html')">Referrals</button>
-<button onclick="toggleTheme()">Theme</button>
-<button onclick="changeLanguage()">Language</button>
-<button onclick="shareApp()">Share</button>
-<button onclick="requestWithdrawal()">Withdraw Now</button>
-  <button onclick="window.location.href='folder/ad.html'">Watch Ad</button>
-  <script src="script.js"></script>
 <body>
-  <link rel="stylesheet" href="style.css">
- <button onclick="window.location.href='referral.html'">Referral</button>
-  <button onclick="window.location.href='setting.html'">Settings</button>
   <div class="container">
     <h1>GoldTask</h1>
-    <p>Watch ads, earn money, and invite friends!</p><div class="button-group">
-  <button onclick="openAdPage()">Watch Ad</button>
-  <button onclick="window.location.href='withdrawal.html'">Withdrawal</button>
-  <button onclick="window.location.href='dashboard.html'">Dashboard</button>
-  <button onclick="window.location.href='setting.html'">Settings</button>
-  <button onclick="copyReferralLink()">Referral</button>
-    withdrawal.html
-      <div 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey</title>
-    <link rel="stylesheet" href="survey.css"> <!-- Link to the CSS file -->
-</head>
-<body>
+    <p>Watch ads, earn money, and invite friends!</p>
 
-    <div class="survey-container">
-        <h3>Complete Survey to Earn Coins!</h3>
-        <p>Click the button below to watch the video and subscribe to our channel.</p>
-
-        <!-- Survey Button -->
-        <button class="survey-btn" onclick="startSurvey()">Start Survey</button>
-
-        <!-- YouTube Video (Initially hidden) -->
-        <div id="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/NZ-mcJyqdBs?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <!-- Channel Link -->
-        <p>Subscribe to our channel: <a href="https://www.youtube.com/@ToonCraftStudio-f7o" target="_blank">ToonCraftStudio</a></p>
-    </div>
-
-    <script src="survey.js"></script> <!-- Link to the JavaScript file -->
-</body>
-</html>
-       
-
-<p>You can watch only <strong>10 ads</strong> every 24 hours.</p>
-<p>Referral Link: <span id="referralText">https://youtube.com/@YourChannel</span></p>
-<p id="adsLeft"></p>
+    <button onclick="openAdPage()">Watch Ads</button>
+    <button onclick="window.location.href='withdrawal.html'">Withdrawal</button>
+    <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+    <button onclick="window.location.href='setting.html'">Settings</button>
+    <button onclick="copyReferralLink()">Copy Referral Link</button>
     
-<button onclick="window.location.href='dashboard.html'">Dashboard</button>
-    
-  </div>  <script src="script.js"></script>  <script>
+    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/</span></p>
+    <p id="adsLeft"></p>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
     function openAdPage() {
       if (checkAdLimit()) {
         window.location.href = 'ad.html';
@@ -100,7 +103,7 @@
       }
     }
 
-    // Show ads left on load
     checkAdLimit();
-  </script></body>
+  </script>
+</body>
 </html>
