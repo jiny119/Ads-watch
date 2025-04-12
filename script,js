@@ -19,11 +19,29 @@ function updateBalanceDisplay() {
 
 // Function: Watch Ad
 function watchAd() {
-  const randomAd = adVideos[Math.floor(Math.random() * adVideos.length)];
-  window.open(randomAd, '_blank');
-  balance += 0.15;
-  localStorage.setItem('balance', balance.toFixed(2));
-  updateBalanceDisplay();
+  // Get the current date
+  let today = new Date().toLocaleDateString();
+  let adData = JSON.parse(localStorage.getItem("adLimit")) || { date: today, count: 0 };
+
+  // Reset ad count if the date has changed
+  if (adData.date !== today) {
+    adData = { date: today, count: 0 };
+  }
+
+  // Check if the user has reached the 10 ad limit for today
+  if (adData.count < 10) {
+    const randomAd = adVideos[Math.floor(Math.random() * adVideos.length)];
+    window.open(randomAd, '_blank');
+    balance += 0.15;
+    localStorage.setItem('balance', balance.toFixed(2));
+    updateBalanceDisplay();
+    
+    // Update ad count
+    adData.count++;
+    localStorage.setItem("adLimit", JSON.stringify(adData));
+  } else {
+    alert("You have reached today's ad limit. Come back tomorrow!");
+  }
 }
 
 // Extra Functions (for other pages if needed)
