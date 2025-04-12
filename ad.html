@@ -50,14 +50,51 @@
       font-size: 18px;
       color: green;
     }
+
+    #message {
+      color: green;
+      margin-top: 10px;
+      font-size: 16px;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .loader {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .home-btn {
+      margin-top: 30px;
+      display: inline-block;
+      text-decoration: none;
+      background-color: #ffd700;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .home-btn:hover {
+      background-color: #e6c200;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Watch Ads & Earn</h1>
-    <p>Click the button below to watch an ad and earn $0.15!</p>
+    <p>Click the button below to watch an ad and earn <strong>500 Coins</strong>!</p>
     <button onclick="watchAd()">Watch Ad</button>
-    <p id="balance">Your Earning: $0.00</p>
+    <div class="loader" id="loader">Loading Ad...</div>
+    <p id="balance">Your Earning: 0 Coins</p>
+    <p id="message">+500 Coins Added!</p>
+    <a href="index.html" class="home-btn">Back to Home</a>
   </div>
 
   <script>
@@ -67,18 +104,24 @@
       "https://youtu.be/EfdvmBgWEvE?si=LNmqN8cbpqvNXDsP"
     ];
 
-    // Load existing earning
-    let earning = parseFloat(localStorage.getItem('adEarning')) || 0.00;
-    document.getElementById('balance').innerText = `Your Earning: $${earning.toFixed(2)}`;
+    let coins = parseInt(localStorage.getItem('coins')) || 0;
+    document.getElementById('balance').innerText = `Your Earning: ${coins} Coins`;
 
     function watchAd() {
-      const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
-      window.open(randomAd, '_blank');
+      document.getElementById('loader').style.display = 'block';
+      document.getElementById('message').style.display = 'none';
 
-      // Add $0.15 to earning
-      earning += 0.15;
-      localStorage.setItem('adEarning', earning.toFixed(2));
-      document.getElementById('balance').innerText = `Your Earning: $${earning.toFixed(2)}`;
+      setTimeout(() => {
+        const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
+        window.open(randomAd, '_blank');
+
+        coins += 500;
+        localStorage.setItem('coins', coins);
+        document.getElementById('balance').innerText = `Your Earning: ${coins} Coins`;
+
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('message').style.display = 'block';
+      }, 5000);
     }
   </script>
 </body>
