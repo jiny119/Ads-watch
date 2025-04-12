@@ -50,10 +50,18 @@
       font-weight: bold;
       margin-top: 10px;
     }
+
+    #welcomeMessage {
+      font-size: 24px;
+      color: #b8860b;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div id="welcomeMessage">Welcome to GoldTask</div>
+  
+  <div class="container" style="display:none;" id="mainContainer">
     <h1>GoldTask</h1>
     <p>Watch ads, earn money, and invite friends!</p>
 
@@ -114,6 +122,11 @@
         return false;
       }
     }
+
+    setTimeout(function() {
+      document.getElementById("welcomeMessage").style.display = "none";
+      document.getElementById("mainContainer").style.display = "block";
+    }, 5000); // 5 seconds
 
     checkAdLimit();
   </script>
