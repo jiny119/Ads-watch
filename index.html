@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GoldTask - Earn Daily</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,20 +30,30 @@
     }
 
     button {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
       margin: 10px 0;
       padding: 14px;
       font-size: 16px;
       font-weight: bold;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       background: linear-gradient(45deg, #ffd700, #ffcc00);
       cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     button:hover {
       background: linear-gradient(45deg, #ffcc00, #e6b800);
+      transform: translateY(-2px);
+    }
+
+    button i {
+      font-size: 18px;
     }
 
     #referralText {
@@ -56,6 +66,12 @@
       color: #b8860b;
       margin-top: 20px;
     }
+
+    #adsLeft {
+      margin-top: 10px;
+      color: #d2691e;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -65,12 +81,12 @@
     <h1>GoldTask</h1>
     <p>Watch ads, earn money, and invite friends!</p>
 
-    <button onclick="playAd()">Watch Ads</button>
-    <button onclick="window.location.href='withdrawal.html'">Withdrawal</button>
-    <button onclick="window.location.href='dashboard.html'">Dashboard</button>
-    <button onclick="window.location.href='setting.html'">Settings</button>
-    <button onclick="copyReferralLink()">Copy Referral Link</button>
-    <button onclick="openSurvey()">Survey</button>
+    <button onclick="playAd()"><i class="fas fa-play-circle"></i> Watch Ads</button>
+    <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>
+    <button onclick="window.location.href='dashboard.html'"><i class="fas fa-chart-line"></i> Dashboard</button>
+    <button onclick="window.location.href='setting.html'"><i class="fas fa-cog"></i> Settings</button>
+    <button onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy Referral Link</button>
+    <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
 
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/</span></p>
     <p id="adsLeft"></p>
