@@ -51,6 +51,11 @@
       font-size: 18px;
       color: green;
     }
+
+    #adsLeft {
+      margin-top: 10px;
+      color: #b22222;
+    }
   </style>
 </head>
 <body>
@@ -59,9 +64,64 @@
     <p>Click the button below to watch an ad and earn <strong>$0.15</strong>!</p>
     <button onclick="watchAd()">Watch Ad</button>
     <p id="balance">$0.00</p>
+    <p id="adsLeft"></p>
   </div>
 
-  <!-- Link JavaScript file -->
-  <script src="script.js"></script>
+  <script>
+    const adLinks = [
+      "https://youtube.com/shorts/nPN3DQnrUGw?si=CgUpqE9Mitj-KEo8",
+      "https://youtu.be/EfdvmBgWEvE?si=x3I4IA5Oe9-N9YHe",
+      "https://youtu.be/trr3AC1jiEk?si=V9derBHw0FxS9NFM",
+      "https://youtu.be/zbDr547EFW0?si=bnHS2OIdNmuoRhVn"
+    ];
+
+    const maxAdsPerDay = 10;
+    const rewardPerAd = 0.15;
+
+    function loadProgress() {
+      const data = JSON.parse(localStorage.getItem("adData")) || {};
+      const today = new Date().toDateString();
+
+      if (data.date !== today) {
+        return { date: today, count: 0, balance: 0 };
+      }
+
+      return data;
+    }
+
+    function saveProgress(data) {
+      localStorage.setItem("adData", JSON.stringify(data));
+    }
+
+    function updateDisplay(data) {
+      document.getElementById("balance").textContent = `$${data.balance.toFixed(2)}`;
+      document.getElementById("adsLeft").textContent = `Ads left today: ${maxAdsPerDay - data.count}`;
+    }
+
+    function watchAd() {
+      let data = loadProgress();
+
+      if (data.count >= maxAdsPerDay) {
+        alert("You’ve reached your daily ad limit!");
+        return;
+      }
+
+      // Open random ad link
+      const randomLink = adLinks[Math.floor(Math.random() * adLinks.length)];
+      window.open(randomLink, "_blank");
+
+      // Update balance and count
+      data.count += 1;
+      data.balance = (data.balance || 0) + rewardPerAd;
+      data.date = new Date().toDateString();
+
+      saveProgress(data);
+      updateDisplay(data);
+    }
+
+    // On page load
+    const initialData = loadProgress();
+    updateDisplay(initialData);
+  </script>
 </body>
 </html>
