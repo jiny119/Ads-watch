@@ -103,7 +103,7 @@
     <h1>GoldTask</h1>
     <p>Watch ads, earn money, and invite friends!</p>
 
-    <button onclick="playAd()"><i class="fas fa-play-circle"></i> Watch Ads</button>
+    <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Go to Ad Page</button>
     <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>
     <button onclick="window.location.href='dashboard.html'"><i class="fas fa-chart-line"></i> Dashboard</button>
     <button onclick="window.location.href='setting.html'"><i class="fas fa-cog"></i> Settings</button>
@@ -112,27 +112,10 @@
     <button class="logout-btn" onclick="logout()">Logout</button>
 
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/</span></p>
-    <p id="adsLeft"></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
   </div>
 
   <script>
-    const adLinks = [
-      "https://youtube.com/shorts/7Zy6upTm-EI?si=VB-zsjITttOnTrIY",
-      "https://youtu.be/trr3AC1jiEk?si=9EvK64Pl_cBguyUU",
-      "https://youtu.be/EfdvmBgWEvE?si=4-KMQ_P-8z21Zzh7",
-      "https://youtube.com/shorts/nPN3DQnrUGw?si=pM_-d7TuurDGjOGX"
-    ];
-
-    function playAd() {
-      if (checkAdLimit()) {
-        const randomAd = adLinks[Math.floor(Math.random() * adLinks.length)];
-        window.open(randomAd, "_blank");
-      } else {
-        alert("You have reached today's ad limit. Come back tomorrow!");
-      }
-    }
-
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
     }
@@ -142,25 +125,6 @@
       navigator.clipboard.writeText(text).then(() => {
         alert("Referral link copied!");
       });
-    }
-
-    function checkAdLimit() {
-      let today = new Date().toLocaleDateString();
-      let adData = JSON.parse(localStorage.getItem("adLimit")) || { date: today, count: 0 };
-
-      if (adData.date !== today) {
-        adData = { date: today, count: 0 };
-      }
-
-      if (adData.count < 10) {
-        adData.count++;
-        localStorage.setItem("adLimit", JSON.stringify(adData));
-        document.getElementById("adsLeft").innerText = `Ads left today: ${10 - adData.count}`;
-        return true;
-      } else {
-        document.getElementById("adsLeft").innerText = "Ads left today: 0";
-        return false;
-      }
     }
 
     function fakeWithdrawal() {
@@ -175,7 +139,6 @@
       }, 3000);
     }
 
-    // Signup/Login System
     function signup() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
@@ -211,14 +174,12 @@
       setTimeout(() => {
         document.getElementById("welcomeMessage").style.display = "none";
         document.getElementById("mainContainer").style.display = "block";
-        checkAdLimit();
       }, 2000);
     }
 
-    // Check on page load
     if (localStorage.getItem("goldLoggedIn") === "true") {
       showDashboard();
     }
   </script>
 </body>
-</html>
+  </html>
