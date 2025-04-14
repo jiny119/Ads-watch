@@ -113,11 +113,33 @@
 
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/index.html?ref=MyUsername</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
+    
+    <!-- Earnings display -->
+    <p id="totalEarnings">Total Earnings: $0.00</p>
   </div>
 
   <script>
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
+
+      // After 10 seconds, add $0.15 earning
+      setTimeout(() => {
+        let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+        earnings += 0.15;
+        localStorage.setItem("goldEarnings", earnings.toFixed(2));
+        updateEarningsDisplay();
+        alert("Survey complete! You earned $0.15");
+      }, 10000);
+    }
+
+    function updateEarningsDisplay() {
+      let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+      document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
+    }
+
+    // Call this on page load if logged in
+    if (localStorage.getItem("goldLoggedIn") === "true") {
+      updateEarningsDisplay();
     }
 
     function copyReferralLink() {
