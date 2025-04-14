@@ -63,7 +63,6 @@
     <h1>Watch Ads & Earn</h1>
     <p>Click the button below to watch an ad and earn <strong>$0.15</strong>!</p>
     <button onclick="watchAd()">Watch Ad</button>
-    <button onclick="watchAd()">Watch Ad</button>
     <p id="balance">$0.00</p>
     <p id="adsLeft"></p>
   </div>
@@ -107,37 +106,28 @@
         return;
       }
 
-      // Open random ad link
       const randomLink = adLinks[Math.floor(Math.random() * adLinks.length)];
       window.open(randomLink, "_blank");
 
-      // Update balance and count
       data.count += 1;
       data.balance = (data.balance || 0) + rewardPerAd;
       data.date = new Date().toDateString();
 
       saveProgress(data);
       updateDisplay(data);
+      logActivity("Watched Ad and earned coins");
+    }
+
+    function logActivity(text) {
+      let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+      const now = new Date().toLocaleString();
+      logs.push(`${text} at ${now}`);
+      localStorage.setItem("activityLogs", JSON.stringify(logs));
     }
 
     // On page load
     const initialData = loadProgress();
     updateDisplay(initialData);
-  </script>
-function watchAd() {
-  // Random ad open karne ka code yahan hoga
-  logActivity("Watched Ad and earned coins");
-  
-  // Tumhara existing random YouTube ad opening code bhi yahan call karo
-}
-
-// logActivity function
-function logActivity(text) {
-  let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
-  const now = new Date().toLocaleString();
-  logs.push(`${text} at ${now}`);
-  localStorage.setItem("activityLogs", JSON.stringify(logs));
-}
   </script>
 </body>
 </html>
