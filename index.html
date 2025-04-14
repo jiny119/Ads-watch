@@ -102,7 +102,7 @@
     <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
     <button class="logout-btn" onclick="logout()">Logout</button>
 
-    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/index.html?ref=MyUsername</span></p>
+    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=MyUsername</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
     
     <!-- Daily Check-In Reward: Button and Coins Display -->
@@ -115,10 +115,10 @@
 
   <script>
     function logActivity(text) {
-  let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
-  const now = new Date().toLocaleString();
-  logs.push(`${text} at ${now}`);
-  localStorage.setItem("activityLogs", JSON.stringify(logs));
+      let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+      const now = new Date().toLocaleString();
+      logs.push(`${text} at ${now}`);
+      localStorage.setItem("activityLogs", JSON.stringify(logs));
     }
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
