@@ -124,5 +124,20 @@
     const initialData = loadProgress();
     updateDisplay(initialData);
   </script>
+function watchAd() {
+  // Random ad open karne ka code yahan hoga
+  logActivity("Watched Ad and earned coins");
+  
+  // Tumhara existing random YouTube ad opening code bhi yahan call karo
+}
+
+// logActivity function
+function logActivity(text) {
+  let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+  const now = new Date().toLocaleString();
+  logs.push(`${text} at ${now}`);
+  localStorage.setItem("activityLogs", JSON.stringify(logs));
+}
+  </script>
 </body>
 </html>
