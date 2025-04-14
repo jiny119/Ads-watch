@@ -13,7 +13,6 @@
       text-align: center;
       padding: 20px;
     }
-
     .container {
       max-width: 600px;
       margin: auto;
@@ -23,12 +22,10 @@
       border: 2px solid #ffd700;
       box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
-
     h1 {
       color: #b8860b;
       margin-bottom: 15px;
     }
-
     button {
       display: block;
       width: 100%;
@@ -41,28 +38,23 @@
       background: linear-gradient(45deg, #ffd700, #ffcc00);
       cursor: pointer;
     }
-
     button:hover {
       background: linear-gradient(45deg, #ffcc00, #e6b800);
     }
-
     #referralText {
       font-weight: bold;
       margin-top: 10px;
     }
-
     #welcomeMessage {
       font-size: 24px;
       color: #b8860b;
       margin-top: 20px;
     }
-
     #fakeWithdrawalMsg {
       display: none;
       color: green;
       font-weight: bold;
     }
-
     .auth-container {
       max-width: 400px;
       margin: auto;
@@ -72,7 +64,6 @@
       border-radius: 12px;
       margin-bottom: 20px;
     }
-
     input {
       width: 90%;
       padding: 12px;
@@ -80,7 +71,6 @@
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
     .logout-btn {
       background: crimson;
       color: white;
@@ -114,14 +104,17 @@
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/index.html?ref=MyUsername</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
     
-    <!-- Earnings display -->
+    <!-- Daily Check-In Reward: Button and Coins Display -->
+    <button onclick="dailyCheckInReward()">Daily Check-In</button>
+    <p id="coinsDisplay">Total Coins: 0</p>
+    
+    <!-- Total Earnings Display for Survey -->
     <p id="totalEarnings">Total Earnings: $0.00</p>
   </div>
 
   <script>
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
-
       // After 10 seconds, add $0.15 earning
       setTimeout(() => {
         let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
@@ -137,7 +130,6 @@
       document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
     }
 
-    // Call this on page load if logged in
     if (localStorage.getItem("goldLoggedIn") === "true") {
       updateEarningsDisplay();
     }
@@ -196,6 +188,8 @@
       setTimeout(() => {
         document.getElementById("welcomeMessage").style.display = "none";
         document.getElementById("mainContainer").style.display = "block";
+        let coins = parseInt(localStorage.getItem("coins") || "0");
+        updateCoinsDisplay(coins);
       }, 2000);
     }
 
@@ -206,13 +200,47 @@
     // === Referral Earning Logic (sirf ek dafa) ===
     const urlParams = new URLSearchParams(window.location.search);
     const referrer = urlParams.get("ref");
-
     if (referrer && !localStorage.getItem("ref_earned")) {
       let refKey = `coins_${referrer}`;
       let current = parseInt(localStorage.getItem(refKey) || "0");
       localStorage.setItem(refKey, current + 100); // 100 coins milenge
       localStorage.setItem("ref_earned", "true");
     }
+
+    // ===== Daily Check-In Reward Functionality =====
+    function dailyCheckInReward() {
+      let lastLogin = localStorage.getItem("lastLoginDate");
+      let currentDate = new Date().toLocaleDateString();
+      if (lastLogin !== currentDate) {
+        localStorage.setItem("lastLoginDate", currentDate);
+        let streak = parseInt(localStorage.getItem("streak") || "0");
+        let reward = getDailyReward(streak);
+        let currentCoins = parseInt(localStorage.getItem("coins") || "0");
+        currentCoins += reward;
+        localStorage.setItem("coins", currentCoins);
+        localStorage.setItem("streak", streak + 1);
+        alert(`You earned ${reward} coins for today's check-in!`);
+        updateCoinsDisplay(currentCoins);
+      } else {
+        alert("You already checked in today. Come back tomorrow!");
+      }
+    }
+
+    function getDailyReward(streak) {
+      if (streak >= 6) {
+        return 50; // 7th day bonus
+      }
+      return (streak + 1) * 5; // Day 1 = 5, Day 2 = 10, etc.
+    }
+
+    function updateCoinsDisplay(coins) {
+      document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      let savedCoins = parseInt(localStorage.getItem("coins") || "0");
+      updateCoinsDisplay(savedCoins);
+    });
   </script>
 </body>
 </html>
