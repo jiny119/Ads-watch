@@ -111,7 +111,7 @@
     <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
     <button class="logout-btn" onclick="logout()">Logout</button>
 
-    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/</span></p>
+    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/index.html?ref=MyUsername</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
   </div>
 
@@ -180,6 +180,17 @@
     if (localStorage.getItem("goldLoggedIn") === "true") {
       showDashboard();
     }
+
+    // === Referral Earning Logic (sirf ek dafa) ===
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrer = urlParams.get("ref");
+
+    if (referrer && !localStorage.getItem("ref_earned")) {
+      let refKey = `coins_${referrer}`;
+      let current = parseInt(localStorage.getItem(refKey) || "0");
+      localStorage.setItem(refKey, current + 100); // 100 coins milenge
+      localStorage.setItem("ref_earned", "true");
+    }
   </script>
 </body>
-  </html>
+</html>
