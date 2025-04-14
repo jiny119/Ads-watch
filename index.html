@@ -114,6 +114,12 @@
   </div>
 
   <script>
+    function logActivity(text) {
+  let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+  const now = new Date().toLocaleString();
+  logs.push(`${text} at ${now}`);
+  localStorage.setItem("activityLogs", JSON.stringify(logs));
+    }
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
       // After 10 seconds, add $0.15 earning
