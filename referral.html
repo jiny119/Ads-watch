@@ -22,6 +22,10 @@
       margin-top: 10px;
       color: #b8860b;
     }
+    #referralCount {
+      font-size: 20px;
+      color: #b8860b;
+    }
   </style>
 </head>
 <body>
@@ -33,16 +37,49 @@
 
     <button class="referral-btn" onclick="copyReferral()">Copy Referral Link</button>
 
-    <h3>You have 10 referrals</h3>
+    <h3>You have <span id="referralCount">10</span> referrals</h3>
+
+    <h3>Your total earnings from referrals: <span id="referralEarnings">100</span> coins</h3>
   </div>
 
   <script>
+    // Function to copy the referral link
     function copyReferral() {
       const link = "https://goldtask.vercel.app/?ref=GOLD123";
       navigator.clipboard.writeText(link).then(() => {
         alert("Referral link copied!");
       });
     }
+
+    // Simulating referral earning system (for demonstration purposes)
+    function updateReferralEarnings() {
+      let earnings = parseInt(localStorage.getItem('referralEarnings')) || 0;
+      let referrals = parseInt(localStorage.getItem('referralCount')) || 0;
+
+      // Every new referral will add 10 coins to earnings
+      earnings += referrals * 10;
+      
+      // Save updated earnings and referrals in local storage
+      localStorage.setItem('referralEarnings', earnings);
+      localStorage.setItem('referralCount', referrals);
+
+      // Display updated referral earnings and count
+      document.getElementById('referralEarnings').textContent = earnings;
+      document.getElementById('referralCount').textContent = referrals;
+    }
+
+    // Simulate adding new referrals and updating earnings
+    function addReferral() {
+      let referrals = parseInt(localStorage.getItem('referralCount')) || 0;
+      referrals += 1;
+      localStorage.setItem('referralCount', referrals);
+
+      // Update referral earnings after adding a new referral
+      updateReferralEarnings();
+    }
+
+    // Call the function to update referral count and earnings on page load
+    window.onload = updateReferralEarnings;
   </script>
 </body>
 </html>
