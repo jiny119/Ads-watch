@@ -67,6 +67,27 @@ function changeLanguage() {
 function shareApp() {
   alert("Share this link: https://goldtask.vercel.app");
 }
+function generateReferralLink() {
+  const username = localStorage.getItem("username");
+  if (username) {
+    const referralURL = `https://ads-watch-anj9.vercel.app/#ref=${username}`;
+    document.getElementById("referralLink").value = referralURL;
+    document.getElementById("referralSection").style.display = "block";
+  }
+}
+
+function copyReferralLink() {
+  const linkInput = document.getElementById("referralLink");
+  linkInput.select();
+  linkInput.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Referral link copied!");
+}
+
+// Page load par referral link show karo agar user login hai
+window.onload = function () {
+  generateReferralLink();
+};
 
 function startSurvey() {
   const video = document.getElementById('video-container');
