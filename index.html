@@ -1,251 +1,299 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>GoldTask - Earn Daily</title>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
-  <style>  
-    body {  
-      font-family: Arial, sans-serif;  
-      background-color: #fff8e1;  
-      color: #333;  
-      text-align: center;  
-      padding: 20px;  
-    }  
-    .container {  
-      max-width: 600px;  
-      margin: auto;  
-      padding: 30px;  
-      background: #fffef2;  
-      border-radius: 12px;  
-      border: 2px solid #ffd700;  
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);  
-    }  
-    h1 {  
-      color: #b8860b;  
-      margin-bottom: 15px;  
-    }  
-    button {  
-      display: block;  
-      width: 100%;  
-      margin: 10px 0;  
-      padding: 14px;  
-      font-size: 16px;  
-      font-weight: bold;  
-      border: none;  
-      border-radius: 8px;  
-      background: linear-gradient(45deg, #ffd700, #ffcc00);  
-      cursor: pointer;  
-    }  
-    button:hover {  
-      background: linear-gradient(45deg, #ffcc00, #e6b800);  
-    }  
-    #referralText {  
-      font-weight: bold;  
-      margin-top: 10px;  
-    }  
-    #welcomeMessage {  
-      font-size: 24px;  
-      color: #b8860b;  
-      margin-top: 20px;  
-    }  
-    #fakeWithdrawalMsg {  
-      display: none;  
-      color: green;  
-      font-weight: bold;  
-    }  
-    .auth-container {  
-      max-width: 400px;  
-      margin: auto;  
-      padding: 20px;  
-      background: #fff;  
-      border: 2px dashed #ffd700;  
-      border-radius: 12px;  
-      margin-bottom: 20px;  
-    }  
-    input {  
-      width: 90%;  
-      padding: 12px;  
-      margin: 10px 0;  
-      border: 1px solid #ccc;  
-      border-radius: 8px;  
-    }  
-    .logout-btn {  
-      background: crimson;  
-      color: white;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <div class="auth-container" id="authContainer">  
-    <h2>GoldTask Login / Signup</h2>  
-    <input type="text" id="username" placeholder="Enter username" />  
-    <input type="password" id="password" placeholder="Enter password" />  
-    <button onclick="signup()">Sign Up</button>  
-    <button onclick="login()">Log In</button>  
-  </div>    <div id="welcomeMessage" style="display:none;">Welcome to GoldTask</div>    <div class="container" style="display:none;" id="mainContainer">  
-    <h1>GoldTask</h1>  
-    <p>Watch ads, earn money, and invite friends!</p>  
-    <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Go to Ad Page</button>  
-    <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>  
-    <button onclick="window.location.href='dashboard.html'"><i class="fas fa-chart-line"></i> Dashboard</button>  
-    <button onclick="window.location.href='activity.html'"><i class="fas fa-clock"></i> Activity History</button>  
-    <button onclick="window.location.href='setting.html'"><i class="fas fa-cog"></i> Settings</button>  
-    <button onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy Referral Link</button>  
-    <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>  
-    <button class="logout-btn" onclick="logout()">Logout</button>  <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=</span></p>  
-<p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>  
-<!-- Daily Check-In Reward: Button and Coins Display -->  
-<button onclick="dailyCheckInReward()">Daily Check-In</button>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoldTask - Earn Daily</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8e1;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: #fffef2;
+      border-radius: 12px;
+      border: 2px solid #ffd700;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #b8860b;
+      margin-bottom: 15px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #ffd700, #ffcc00);
+      cursor: pointer;
+    }
+    button:hover {
+      background: linear-gradient(45deg, #ffcc00, #e6b800);
+    }
+    #referralText {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #welcomeMessage {
+      font-size: 24px;
+      color: #b8860b;
+      margin-top: 20px;
+    }
+    #fakeWithdrawalMsg {
+      display: none;
+      color: green;
+      font-weight: bold;
+    }
+    .auth-container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border: 2px dashed #ffd700;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .logout-btn {
+      background: crimson;
+      color: white;
+    }
+    /* Added for referral count display */
+    #referralCountDisplay {
+      font-size: 18px;
+      color: #b8860b;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container" id="authContainer">
+    <h2>GoldTask Login / Signup</h2>
+    <input type="text" id="username" placeholder="Enter username" />
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Log In</button>
+  </div>
 
-<p id="coinsDisplay">Total Coins: 0</p>  
-<!-- Total Earnings Display for Survey -->  
-<p id="totalEarnings">Total Earnings: $0.00</p>  
-<div id="referralSection" style="display: none; margin-top: 20px;">
+  <div id="welcomeMessage" style="display:none;">Welcome to GoldTask</div>
 
-  <h3>Your Referral Link:</h3>  
-  <input type="text" id="referralLink" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">  
-  <button onclick="copyReferralLink()" style="margin-top: 10px; padding: 10px 20px; border: none; background: #4CAF50; color: white; border-radius: 8px;">Copy</button>  
-  </div>    <script>  
-    function logActivity(text) {  
-      let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];  
-      const now = new Date().toLocaleString();  
-      logs.push(`${text} at ${now}`);  
-      localStorage.setItem("activityLogs", JSON.stringify(logs));  
-    }  
-  
-    function openSurvey() {  
-      window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");  
-      setTimeout(() => {  
-        let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");  
-        earnings += 0.15;  
-        localStorage.setItem("goldEarnings", earnings.toFixed(2));  
-        updateEarningsDisplay();  
-        alert("Survey complete! You earned $0.15");  
-      }, 10000);  
-    }  
-  
-    function updateEarningsDisplay() {  
-      let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");  
-      document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;  
-    }  
-  
-    if (localStorage.getItem("goldLoggedIn") === "true") {  
-      updateEarningsDisplay();  
-    }  
-  
-    function copyReferralLink() {  
-      const text = document.getElementById("referralText").innerText;  
-      navigator.clipboard.writeText(text).then(() => {  
-        alert("Referral link copied!");  
-      });  
-    }  
-  
-    function fakeWithdrawal() {  
-      document.querySelector("button").style.display = "none";   
-      document.getElementById("fakeWithdrawalMsg").style.display = "block";  
-      setTimeout(() => {  
-        document.getElementById("fakeWithdrawalMsg").innerText = "Your withdrawal request has been processed successfully!";  
-        setTimeout(() => {  
-          document.getElementById("fakeWithdrawalMsg").style.display = "none";  
-          document.querySelector("button").style.display = "block";  
-        }, 3000);  
-      }, 3000);  
-    }  
-  
-    function signup() {  
-      const user = document.getElementById("username").value;  
-      const pass = document.getElementById("password").value;  
-      if (user && pass) {  
-        localStorage.setItem("goldUser", JSON.stringify({ user, pass }));  
-        alert("Signup successful! Now login.");  
-      } else {  
-        alert("Please enter both username and password.");  
-      }  
-    }  
-  
-    function login() {  
-      const user = document.getElementById("username").value;  
-      const pass = document.getElementById("password").value;  
-      const saved = JSON.parse(localStorage.getItem("goldUser"));  
-  
-      if (saved && user === saved.user && pass === saved.pass) {  
-        localStorage.setItem("goldLoggedIn", "true");  
-        localStorage.setItem("loggedInUser", user); // Save current username  
-        showDashboard();  
-      } else {  
-        alert("Invalid credentials.");  
-      }  
-    }  
-  
-    function logout() {  
-      localStorage.removeItem("goldLoggedIn");  
-      localStorage.removeItem("loggedInUser");  
-      location.reload();  
-    }  
-  
-    function showDashboard() {  
-      document.getElementById("authContainer").style.display = "none";  
-      document.getElementById("welcomeMessage").style.display = "block";  
-      setTimeout(() => {  
-        document.getElementById("welcomeMessage").style.display = "none";  
-        document.getElementById("mainContainer").style.display = "block";  
-        let coins = parseInt(localStorage.getItem("coins") || "0");  
-        updateCoinsDisplay(coins);  
-  
-        // Update referral text with username  
-        const currentUser = localStorage.getItem("loggedInUser") || "MyUsername";  
-        document.getElementById("referralText").innerText = `https://ads-watch-anj9.vercel.app/#ref=${currentUser}`;  
-      }, 2000);  
-    }  
-  
-    if (localStorage.getItem("goldLoggedIn") === "true") {  
-      showDashboard();  
-    }  
-  
-    // === Referral Earning Logic ===  
-    const urlParams = new URLSearchParams(window.location.hash.slice(1));  
-    const referrer = urlParams.get("ref");  
-    if (referrer && !localStorage.getItem("ref_earned")) {  
-      let refKey = `coins_${referrer}`;  
-      let current = parseInt(localStorage.getItem(refKey) || "0");  
-      localStorage.setItem(refKey, current + 100); // 100 coins for referrer  
-      localStorage.setItem("ref_earned", "true");  
-    }  
-  
-    // ===== Daily Check-In Reward Functionality =====  
-    function dailyCheckInReward() {  
-      let lastLogin = localStorage.getItem("lastLoginDate");  
-      let currentDate = new Date().toLocaleDateString();  
-      if (lastLogin !== currentDate) {  
-        localStorage.setItem("lastLoginDate", currentDate);  
-        let streak = parseInt(localStorage.getItem("streak") || "0");  
-        let reward = getDailyReward(streak);  
-        let currentCoins = parseInt(localStorage.getItem("coins") || "0");  
-        currentCoins += reward;  
-        localStorage.setItem("coins", currentCoins);  
-        localStorage.setItem("streak", streak + 1);  
-        alert(`You earned ${reward} coins for today's check-in!`);  
-        updateCoinsDisplay(currentCoins);  
-      } else {  
-        alert("You already checked in today. Come back tomorrow!");  
-      }  
-    }  
-  
-    function getDailyReward(streak) {  
-      if (streak >= 6) {  
-        return 50;  
-      }  
-      return (streak + 1) * 5;  
-    }  
-  
-    function updateCoinsDisplay(coins) {  
-      document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;  
-    }  
-  
-    document.addEventListener("DOMContentLoaded", function() {  
-      let savedCoins = parseInt(localStorage.getItem("coins") || "0");  
-      updateCoinsDisplay(savedCoins);  
-    });  
-  </script>  </body>  
-  </html>
+  <div class="container" style="display:none;" id="mainContainer">
+    <h1>GoldTask</h1>
+    <p>Watch ads, earn money, and invite friends!</p>
+    
+    <!-- Added referral count display -->
+    <div id="referralCountDisplay">Your Referrals: 0</div>
+    
+    <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Go to Ad Page</button>
+    <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>
+    <button onclick="window.location.href='dashboard.html'"><i class="fas fa-chart-line"></i> Dashboard</button>
+    <button onclick="window.location.href='activity.html'"><i class="fas fa-clock"></i> Activity History</button>
+    <button onclick="window.location.href='setting.html'"><i class="fas fa-cog"></i> Settings</button>
+    <button onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy Referral Link</button>
+    <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    
+    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=</span></p>
+    <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
+    
+    <!-- Daily Check-In Reward: Button and Coins Display -->
+    <button onclick="dailyCheckInReward()">Daily Check-In</button>
+    <p id="coinsDisplay">Total Coins: 0</p>
+    
+    <!-- Total Earnings Display for Survey -->
+    <p id="totalEarnings">Total Earnings: $0.00</p>
+    
+    <div id="referralSection" style="display: none; margin-top: 20px;">
+      <h3>Your Referral Link:</h3>
+      <input type="text" id="referralLink" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+      <button onclick="copyReferralLink()" style="margin-top: 10px; padding: 10px 20px; border: none; background: #4CAF50; color: white; border-radius: 8px;">Copy</button>
+    </div>
+  </div>
+
+  <script>
+    // ========== Existing Functions ==========
+    function logActivity(text) {
+      let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+      const now = new Date().toLocaleString();
+      logs.push(`${text} at ${now}`);
+      localStorage.setItem("activityLogs", JSON.stringify(logs));
+    }
+
+    function openSurvey() {
+      window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
+      setTimeout(() => {
+        let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+        earnings += 0.15;
+        localStorage.setItem("goldEarnings", earnings.toFixed(2));
+        updateEarningsDisplay();
+        alert("Survey complete! You earned $0.15");
+      }, 10000);
+    }
+
+    function updateEarningsDisplay() {
+      let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+      document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
+    }
+
+    if (localStorage.getItem("goldLoggedIn") === "true") {
+      updateEarningsDisplay();
+    }
+
+    function copyReferralLink() {
+      const text = document.getElementById("referralText").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Referral link copied!");
+      });
+    }
+
+    function fakeWithdrawal() {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("fakeWithdrawalMsg").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("fakeWithdrawalMsg").innerText = "Your withdrawal request has been processed successfully!";
+        setTimeout(() => {
+          document.getElementById("fakeWithdrawalMsg").style.display = "none";
+          document.querySelector("button").style.display = "block";
+        }, 3000);
+      }, 3000);
+    }
+
+    function signup() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user && pass) {
+        localStorage.setItem("goldUser", JSON.stringify({ user, pass }));
+        alert("Signup successful! Now login.");
+      } else {
+        alert("Please enter both username and password.");
+      }
+    }
+
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const saved = JSON.parse(localStorage.getItem("goldUser"));
+
+      if (saved && user === saved.user && pass === saved.pass) {
+        localStorage.setItem("goldLoggedIn", "true");
+        localStorage.setItem("loggedInUser", user);
+        // Initialize referral count for new users
+        if (!localStorage.getItem(`referralCount_${user}`)) {
+          localStorage.setItem(`referralCount_${user}`, "0");
+        }
+        showDashboard();
+      } else {
+        alert("Invalid credentials.");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("goldLoggedIn");
+      localStorage.removeItem("loggedInUser");
+      location.reload();
+    }
+
+    function showDashboard() {
+      document.getElementById("authContainer").style.display = "none";
+      document.getElementById("welcomeMessage").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("welcomeMessage").style.display = "none";
+        document.getElementById("mainContainer").style.display = "block";
+        let coins = parseInt(localStorage.getItem("coins") || "0");
+        updateCoinsDisplay(coins);
+
+        // Update referral text with username
+        const currentUser = localStorage.getItem("loggedInUser") || "MyUsername";
+        document.getElementById("referralText").innerText = `https://ads-watch-anj9.vercel.app/#ref=${currentUser}`;
+        
+        // Update referral count display
+        updateReferralCountDisplay();
+      }, 2000);
+    }
+
+    // ========== Referral System ==========
+    function updateReferralCountDisplay() {
+      const currentUser = localStorage.getItem("loggedInUser");
+      if (currentUser) {
+        const count = localStorage.getItem(`referralCount_${currentUser}`) || "0";
+        document.getElementById("referralCountDisplay").innerText = `Your Referrals: ${count}`;
+      }
+    }
+
+    // Check for referral on page load
+    const urlParams = new URLSearchParams(window.location.hash.slice(1));
+    const referrer = urlParams.get("ref");
+    if (referrer && !localStorage.getItem("ref_earned")) {
+      // Increment referrer's count
+      let refCount = parseInt(localStorage.getItem(`referralCount_${referrer}`) || "0");
+      localStorage.setItem(`referralCount_${referrer}`, refCount + 1);
+      
+      // Award coins to referrer (existing functionality)
+      let refKey = `coins_${referrer}`;
+      let current = parseInt(localStorage.getItem(refKey) || "0");
+      localStorage.setItem(refKey, current + 100);
+      
+      localStorage.setItem("ref_earned", "true");
+      
+      // If referrer is currently logged in, update their display
+      const currentUser = localStorage.getItem("loggedInUser");
+      if (currentUser === referrer) {
+        updateReferralCountDisplay();
+      }
+    }
+
+    // ========== Existing Coin Functions ==========
+    function dailyCheckInReward() {
+      let lastLogin = localStorage.getItem("lastLoginDate");
+      let currentDate = new Date().toLocaleDateString();
+      if (lastLogin !== currentDate) {
+        localStorage.setItem("lastLoginDate", currentDate);
+        let streak = parseInt(localStorage.getItem("streak") || "0");
+        let reward = getDailyReward(streak);
+        let currentCoins = parseInt(localStorage.getItem("coins") || "0");
+        currentCoins += reward;
+        localStorage.setItem("coins", currentCoins);
+        localStorage.setItem("streak", streak + 1);
+        alert(`You earned ${reward} coins for today's check-in!`);
+        updateCoinsDisplay(currentCoins);
+      } else {
+        alert("You already checked in today. Come back tomorrow!");
+      }
+    }
+
+    function getDailyReward(streak) {
+      if (streak >= 6) {
+        return 50;
+      }
+      return (streak + 1) * 5;
+    }
+
+    function updateCoinsDisplay(coins) {
+      document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      let savedCoins = parseInt(localStorage.getItem("coins") || "0");
+      updateCoinsDisplay(savedCoins);
+    });
+  </script>
+</body>
+</html>
