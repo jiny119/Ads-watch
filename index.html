@@ -75,7 +75,6 @@
       background: crimson;
       color: white;
     }
-    /* Added for referral count display */
     #referralCountDisplay {
       font-size: 18px;
       color: #b8860b;
@@ -99,7 +98,6 @@
     <h1>GoldTask</h1>
     <p>Watch ads, earn money, and invite friends!</p>
     
-    <!-- Added referral count display -->
     <div id="referralCountDisplay">Your Referrals: 0</div>
     
     <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Go to Ad Page</button>
@@ -114,11 +112,9 @@
     <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
     
-    <!-- Daily Check-In Reward: Button and Coins Display -->
     <button onclick="dailyCheckInReward()">Daily Check-In</button>
     <p id="coinsDisplay">Total Coins: 0</p>
     
-    <!-- Total Earnings Display for Survey -->
     <p id="totalEarnings">Total Earnings: $0.00</p>
     
     <div id="referralSection" style="display: none; margin-top: 20px;">
@@ -129,7 +125,58 @@
   </div>
 
   <script>
-    // ========== Existing Functions ==========
+    // ========== ترمیم شدہ لاگ ان سسٹم ==========
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const saved = JSON.parse(localStorage.getItem("goldUser"));
+
+      if (saved && user === saved.user && pass === saved.pass) {
+        localStorage.setItem("goldLoggedIn", "true");
+        localStorage.setItem("loggedInUser", user);
+        localStorage.setItem("userSession", "active"); // نئی لائن شامل کی
+        
+        if (!localStorage.getItem(`referralCount_${user}`)) {
+          localStorage.setItem(`referralCount_${user}`, "0");
+        }
+        showDashboard();
+      } else {
+        alert("Invalid credentials.");
+      }
+    }
+
+    // ========== ترمیم شدہ صفحہ لوڈ ایونٹ ==========
+    document.addEventListener("DOMContentLoaded", function() {
+      let savedCoins = parseInt(localStorage.getItem("coins") || "0");
+      updateCoinsDisplay(savedCoins);
+      
+      // نئی چیک شامل کی
+      if (localStorage.getItem("goldLoggedIn") === "true" && 
+          localStorage.getItem("userSession") === "active") {
+        showDashboard();
+      }
+
+      // باقی تمام موجودہ کوڈ
+      const urlParams = new URLSearchParams(window.location.hash.slice(1));
+      const referrer = urlParams.get("ref");
+      if (referrer && !localStorage.getItem("ref_earned")) {
+        let refCount = parseInt(localStorage.getItem(`referralCount_${referrer}`) || "0");
+        localStorage.setItem(`referralCount_${referrer}`, refCount + 1);
+        
+        let refKey = `coins_${referrer}`;
+        let current = parseInt(localStorage.getItem(refKey) || "0");
+        localStorage.setItem(refKey, current + 100);
+        
+        localStorage.setItem("ref_earned", "true");
+        
+        const currentUser = localStorage.getItem("loggedInUser");
+        if (currentUser === referrer) {
+          updateReferralCountDisplay();
+        }
+      }
+    });
+
+    // ========== باقی تمام فنکشنز تبدیل نہیں کیے گئے ==========
     function logActivity(text) {
       let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
       const now = new Date().toLocaleString();
@@ -151,10 +198,6 @@
     function updateEarningsDisplay() {
       let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
       document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
-    }
-
-    if (localStorage.getItem("goldLoggedIn") === "true") {
-      updateEarningsDisplay();
     }
 
     function copyReferralLink() {
@@ -187,27 +230,10 @@
       }
     }
 
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      const saved = JSON.parse(localStorage.getItem("goldUser"));
-
-      if (saved && user === saved.user && pass === saved.pass) {
-        localStorage.setItem("goldLoggedIn", "true");
-        localStorage.setItem("loggedInUser", user);
-        // Initialize referral count for new users
-        if (!localStorage.getItem(`referralCount_${user}`)) {
-          localStorage.setItem(`referralCount_${user}`, "0");
-        }
-        showDashboard();
-      } else {
-        alert("Invalid credentials.");
-      }
-    }
-
     function logout() {
       localStorage.removeItem("goldLoggedIn");
       localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("userSession"); // نئی لائن شامل کی
       location.reload();
     }
 
@@ -220,16 +246,13 @@
         let coins = parseInt(localStorage.getItem("coins") || "0");
         updateCoinsDisplay(coins);
 
-        // Update referral text with username
         const currentUser = localStorage.getItem("loggedInUser") || "MyUsername";
         document.getElementById("referralText").innerText = `https://ads-watch-anj9.vercel.app/#ref=${currentUser}`;
         
-        // Update referral count display
         updateReferralCountDisplay();
       }, 2000);
     }
 
-    // ========== Referral System ==========
     function updateReferralCountDisplay() {
       const currentUser = localStorage.getItem("loggedInUser");
       if (currentUser) {
@@ -238,29 +261,6 @@
       }
     }
 
-    // Check for referral on page load
-    const urlParams = new URLSearchParams(window.location.hash.slice(1));
-    const referrer = urlParams.get("ref");
-    if (referrer && !localStorage.getItem("ref_earned")) {
-      // Increment referrer's count
-      let refCount = parseInt(localStorage.getItem(`referralCount_${referrer}`) || "0");
-      localStorage.setItem(`referralCount_${referrer}`, refCount + 1);
-      
-      // Award coins to referrer (existing functionality)
-      let refKey = `coins_${referrer}`;
-      let current = parseInt(localStorage.getItem(refKey) || "0");
-      localStorage.setItem(refKey, current + 100);
-      
-      localStorage.setItem("ref_earned", "true");
-      
-      // If referrer is currently logged in, update their display
-      const currentUser = localStorage.getItem("loggedInUser");
-      if (currentUser === referrer) {
-        updateReferralCountDisplay();
-      }
-    }
-
-    // ========== Existing Coin Functions ==========
     function dailyCheckInReward() {
       let lastLogin = localStorage.getItem("lastLoginDate");
       let currentDate = new Date().toLocaleDateString();
@@ -289,11 +289,6 @@
     function updateCoinsDisplay(coins) {
       document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      let savedCoins = parseInt(localStorage.getItem("coins") || "0");
-      updateCoinsDisplay(savedCoins);
-    });
   </script>
 </body>
 </html>
