@@ -68,7 +68,7 @@
   </style>
 </head>
 <body>
-  <!-- لاگ ان فارم (ads بٹن کے بغیر) -->
+  <!-- لاگ ان فارم -->
   <div class="auth-container" id="authContainer">
     <h2>GoldTask Login / Signup</h2>
     <input type="text" id="username" placeholder="Enter username" />
@@ -79,7 +79,7 @@
 
   <div id="welcomeMessage" style="display:none; font-size:22px; color:#d63384;">Welcome to GoldTask</div>
 
-  <!-- ڈیش بورڈ (صرف یہاں ads بٹن موجود) -->
+  <!-- ڈیش بورڈ -->
   <div class="container" style="display:none;" id="mainContainer">
     <h1>GoldTask</h1>
     <p>Watch ads, earn coins, and invite friends to earn more!</p>
@@ -88,10 +88,9 @@
     <div id="coinsDisplay">Total Coins: 0</div>
     <div id="totalEarnings">Total Earnings: $0.00</div>
 
-    <!-- صرف یہی ایک ads بٹن -->
+    <!-- صرف ایک ads بٹن -->
     <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Watch Ads</button>
 
-    <!-- دیگر بٹنز -->
     <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
     <button onclick="dailyCheckInReward()"><i class="fas fa-calendar-check"></i> Daily Check-In</button>
     <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>
@@ -105,6 +104,7 @@
   </div>
 
   <script>
+    // ڈیٹا اپڈیٹ کرنے والے فنکشنز
     function updateEarningsDisplay() {
       let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
       document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
@@ -121,6 +121,7 @@
       document.getElementById("referralCountDisplay").innerText = `Your Referrals: ${count}`;
     }
 
+    // ڈیش بورڈ دکھائیں
     function showDashboard() {
       document.getElementById("authContainer").style.display = "none";
       document.getElementById("welcomeMessage").style.display = "block";
@@ -135,6 +136,7 @@
       }, 2000);
     }
 
+    // لاگ ان سسٹم
     function login() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
@@ -172,6 +174,7 @@
       location.reload();
     }
 
+    // کمائی کے فنکشنز
     function openSurvey() {
       window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
       setTimeout(() => {
@@ -209,6 +212,7 @@
       });
     }
 
+    // صفحہ لوڈ ہونے پر
     document.addEventListener("DOMContentLoaded", function() {
       updateCoinsDisplay();
       updateEarningsDisplay();
