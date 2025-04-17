@@ -68,6 +68,7 @@
   </style>
 </head>
 <body>
+  <!-- لاگ ان فارم (ads بٹن کے بغیر) -->
   <div class="auth-container" id="authContainer">
     <h2>GoldTask Login / Signup</h2>
     <input type="text" id="username" placeholder="Enter username" />
@@ -78,6 +79,7 @@
 
   <div id="welcomeMessage" style="display:none; font-size:22px; color:#d63384;">Welcome to GoldTask</div>
 
+  <!-- ڈیش بورڈ (صرف یہاں ads بٹن موجود) -->
   <div class="container" style="display:none;" id="mainContainer">
     <h1>GoldTask</h1>
     <p>Watch ads, earn coins, and invite friends to earn more!</p>
@@ -86,7 +88,10 @@
     <div id="coinsDisplay">Total Coins: 0</div>
     <div id="totalEarnings">Total Earnings: $0.00</div>
 
+    <!-- صرف یہی ایک ads بٹن -->
     <button onclick="window.location.href='ad.html'"><i class="fas fa-play-circle"></i> Watch Ads</button>
+
+    <!-- دیگر بٹنز -->
     <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
     <button onclick="dailyCheckInReward()"><i class="fas fa-calendar-check"></i> Daily Check-In</button>
     <button onclick="window.location.href='withdrawal.html'"><i class="fas fa-wallet"></i> Withdrawal</button>
@@ -139,7 +144,6 @@
         localStorage.setItem("goldLoggedIn", "true");
         localStorage.setItem("loggedInUser", user);
         
-        // نئے صارف کے لیے ریفرل کاؤنٹ انیشیلائز کریں
         if (!localStorage.getItem(`referralCount_${user}`)) {
           localStorage.setItem(`referralCount_${user}`, "0");
         }
@@ -163,7 +167,6 @@
     }
 
     function logout() {
-      // صرف لاگ ان ڈیٹا صاف کریں (ئرننگز اور سکے محفوظ رہیں گے)
       localStorage.removeItem("goldLoggedIn");
       localStorage.removeItem("loggedInUser");
       location.reload();
@@ -207,11 +210,9 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-      // ڈیٹا ڈسپلے کریں
       updateCoinsDisplay();
       updateEarningsDisplay();
       
-      // ریفرل سسٹم
       const params = new URLSearchParams(window.location.hash.slice(1));
       const ref = params.get("ref");
       
@@ -226,7 +227,6 @@
         localStorage.setItem("ref_earned", "true");
       }
 
-      // اگر صارف پہلے سے لاگ ان ہے تو ڈیش بورڈ دکھائیں
       if (localStorage.getItem("goldLoggedIn") === "true") {
         showDashboard();
       }
