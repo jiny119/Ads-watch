@@ -134,7 +134,7 @@
         localStorage.setItem("goldLoggedIn", "true");
         localStorage.setItem("loggedInUser", user);
         localStorage.setItem("userSession", "active");
-        
+
         if (!localStorage.getItem(`referralCount_${user}`)) {
           localStorage.setItem(`referralCount_${user}`, "0");
         }
@@ -147,7 +147,8 @@
     document.addEventListener("DOMContentLoaded", function() {
       let savedCoins = parseInt(localStorage.getItem("coins") || "0");
       updateCoinsDisplay(savedCoins);
-      
+      updateEarningsDisplay();
+
       if (localStorage.getItem("goldLoggedIn") === "true" && 
           localStorage.getItem("userSession") === "active") {
         showDashboard();
@@ -158,19 +159,61 @@
       if (referrer && !localStorage.getItem("ref_earned")) {
         let refCount = parseInt(localStorage.getItem(`referralCount_${referrer}`) || "0");
         localStorage.setItem(`referralCount_${referrer}`, refCount + 1);
-        
+
         let refKey = `coins_${referrer}`;
         let current = parseInt(localStorage.getItem(refKey) || "0");
         localStorage.setItem(refKey, current + 100);
-        
+
         localStorage.setItem("ref_earned", "true");
-        
+
         const currentUser = localStorage.getItem("loggedInUser");
         if (currentUser === referrer) {
           updateReferralCountDisplay();
         }
       }
     });
+
+    function logActivity(text) {
+      let logs = JSON.parse(localStorage.getItem("activityLogs")) || [];
+      const now = new Date().toLocaleString();
+      logs.push(`${text} at ${now}`);
+      localStorage.setItem("activityLogs", JSON.stringify(logs));
+    }
+
+    function openSurvey() {
+      window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
+      setTimeout(() => {
+        let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+        earnings += 0.15;
+        localStorage.setItem("goldEarnings", earnings.toFixed(2));
+        updateEarningsDisplay();
+        alert("Survey complete! You earned $0.15");
+      }, 10000);
+    }
+
+    function updateEarningsDisplay() {
+      let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+      document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
+    }
+
+    function copyReferralLink() {
+      const text = document.getElementById("referralText").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Referral link copied!");
+      });
+    }
+
+    function fakeWithdrawal() {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("fakeWithdrawalMsg").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("fakeWithdrawalMsg").innerText = "Your withdrawal request has been processed successfully!";
+        setTimeout(() => {
+          document.getElementById("fakeWithdrawalMsg").style.display = "none";
+          document.querySelector("button").style.display = "block";
+        }, 3000);
+      }, 3000);
+    }
 
     function signup() {
       const user = document.getElementById("username").value;
@@ -201,8 +244,9 @@
 
         const currentUser = localStorage.getItem("loggedInUser") || "MyUsername";
         document.getElementById("referralText").innerText = `https://ads-watch-anj9.vercel.app/#ref=${currentUser}`;
-        
+
         updateReferralCountDisplay();
+        updateEarningsDisplay();
       }, 2000);
     }
 
@@ -212,33 +256,6 @@
         const count = localStorage.getItem(`referralCount_${currentUser}`) || "0";
         document.getElementById("referralCountDisplay").innerText = `Your Referrals: ${count}`;
       }
-    }
-
-    function updateCoinsDisplay(coins) {
-      document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;
-    }
-
-    function copyReferralLink() {
-      const text = document.getElementById("referralText").innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Referral link copied!");
-      });
-    }
-
-    function openSurvey() {
-      window.open("https://www.youtube.com/@ToonCraftStudio-f7o", "_blank");
-      setTimeout(() => {
-        let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
-        earnings += 0.15;
-        localStorage.setItem("goldEarnings", earnings.toFixed(2));
-        updateEarningsDisplay();
-        alert("Survey complete! You earned $0.15");
-      }, 10000);
-    }
-
-    function updateEarningsDisplay() {
-      let earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
-      document.getElementById("totalEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
     }
 
     function dailyCheckInReward() {
@@ -264,6 +281,10 @@
         return 50;
       }
       return (streak + 1) * 5;
+    }
+
+    function updateCoinsDisplay(coins) {
+      document.getElementById("coinsDisplay").innerText = `Total Coins: ${coins}`;
     }
   </script>
 </body>
