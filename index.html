@@ -108,8 +108,8 @@
     <button onclick="copyReferralLink()"><i class="fas fa-copy"></i> Copy Referral Link</button>
     <button onclick="openSurvey()"><i class="fas fa-poll"></i> Survey</button>
     <button class="logout-btn" onclick="logout()">Logout</button>
-
-        <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=</span></p>
+    
+    <p>Referral Link: <span id="referralText">https://ads-watch-anj9.vercel.app/#ref=</span></p>
     <p id="fakeWithdrawalMsg">Processing your withdrawal request...</p>
     
     <button onclick="dailyCheckInReward()">Daily Check-In</button>
@@ -205,7 +205,20 @@
       navigator.clipboard.writeText(text).then(() => {
         alert("Referral link copied!");
       });
-      
+    }
+
+    function fakeWithdrawal() {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("fakeWithdrawalMsg").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("fakeWithdrawalMsg").innerText = "Your withdrawal request has been processed successfully!";
+        setTimeout(() => {
+          document.getElementById("fakeWithdrawalMsg").style.display = "none";
+          document.querySelector("button").style.display = "block";
+        }, 3000);
+      }, 3000);
+    }
+
     function signup() {
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
