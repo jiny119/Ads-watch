@@ -1,33 +1,47 @@
-/* General Body Styling */
+/* General Body Styling - Improved readability */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffe6f0; /* Light Pink */
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Better font stack */
+  background-color: #ffe6f0;
   text-align: center;
   padding: 20px;
-  font-weight: bold;
   color: #4a004a;
+  line-height: 1.6; /* Better text spacing */
 }
 
-/* Main Container */
+/* Main Container - More polished look */
 .container {
   max-width: 550px;
-  margin: auto;
-  background-color: #fff0f5; /* light rose */
-  padding: 30px;
-  border-radius: 20px;
+  margin: 2rem auto;
+  background-color: #fff0f5;
+  padding: 2.5rem;
+  border-radius: 24px;
   border: 3px solid #ff66b2;
-  box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+  box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);
+  backdrop-filter: blur(2px); /* Subtle glass effect */
 }
 
-/* Heading */
+/* Heading - More elegant */
 h1 {
   color: #d63384;
-  font-size: 2.8rem;
-  margin-bottom: 25px;
-  text-shadow: 1px 1px 3px #ffaadd;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(255, 170, 221, 0.5);
+  position: relative;
+  display: inline-block;
 }
 
-/* All Buttons */
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #ff85c1, #ff3399);
+}
+
+/* Buttons - Enhanced with subtle animations */
 button {
   display: flex;
   align-items: center;
@@ -35,78 +49,91 @@ button {
   gap: 10px;
   background: linear-gradient(135deg, #ff85c1, #ff3399);
   color: white;
-  padding: 16px 28px;
+  padding: 1rem 1.75rem;
   border: none;
   border-radius: 14px;
-  margin: 14px auto;
+  margin: 1rem auto;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  font-weight: 600; /* Slightly bolder */
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   width: 100%;
   max-width: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
 }
 
 button:hover {
   background: linear-gradient(135deg, #ff3399, #cc0066);
-  transform: scale(1.05);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
 }
 
-/* Referral Section */
+button:hover::before {
+  left: 100%;
+}
+
+/* Improved typography */
+#referralText, #balance, #adsLeft {
+  font-weight: 600; /* More balanced boldness */
+  transition: color 0.3s ease;
+}
+
 #referralText {
-  font-weight: bold;
   color: #cc0066;
-  margin-top: 10px;
+  margin-top: 0.75rem;
   font-size: 1.1rem;
 }
 
-#adsLeft {
-  margin-top: 10px;
-  color: #cc3300;
-  font-size: 1rem;
-}
-
-/* Balance Text */
 #balance {
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 1.7rem;
   color: #cc0099;
+  margin: 0.5rem 0;
 }
 
-/* Survey Button Style */
-.survey-btn {
-  background-color: #ff66b2;
-  color: white;
-  padding: 16px 24px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.survey-btn:hover {
-  background-color: #e60073;
-  transform: scale(1.05);
-}
-
-/* Withdrawal Msg */
-#fakeWithdrawalMsg {
-  margin-top: 20px;
-  font-weight: bold;
-  color: red;
-}
-
-/* Add spacing for sections */
+/* Section spacing - More consistent */
 .section {
-  margin-top: 24px;
+  margin-top: 2rem;
+  padding: 0 1rem;
 }
 
-/* Button Icons (optional emojis) */
-button.watch-ads::before { content: "▶️ "; }
-button.withdraw::before { content: "💰 "; }
-button.dashboard::before { content: "📊 "; }
-button.settings::before { content: "⚙️ "; }
-button.copy-referral::before { content: "🔗 "; }
-button.survey::before { content: "✅ "; }
+/* Responsive improvements */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 18px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  button {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Loading animation for better UX */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.loading {
+  animation: pulse 1.5s infinite;
+  }
