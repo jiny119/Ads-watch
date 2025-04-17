@@ -1,50 +1,83 @@
+<!-- dashboard.html فائل کے لیے (Ads بٹن کے بغیر) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - GoldTask</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe4f2, #ffc6e0);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    .dashboard-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: #fff0f6;
+      border-radius: 20px;
+      border: 2px solid #ff69b4;
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+    }
+    h1 {
+      color: #d63384;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #ff69b4, #ff85c1);
+      color: white;
+      cursor: pointer;
+    }
+    .stats {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>GoldTask Dashboard</h1>
-    <p>Welcome! Earn money by watching ads & referring friends.</p>
-
-    <div class="dashboard">
-      <p>Total Balance: <span id="balance">$0.00</span></p>
-      <button id="watchAdBtn">Watch Ad</button>
+  <div class="dashboard-container">
+    <h1><i class="fas fa-chart-line"></i> Your Dashboard</h1>
+    
+    <div class="stats">
+      <p id="dashCoins">Total Coins: 0</p>
+      <p id="dashEarnings">Total Earnings: $0.00</p>
+      <p id="dashReferrals">Your Referrals: 0</p>
     </div>
 
-    <div id="referralSection">
-      <p>Your Referral Earnings: <span id="referralEarnings">$0.00</span></p>
-    </div>
-
-    <div class="nav-buttons">
-      <button onclick="location.href='ad.html'">Go to Ad Page</button>
-      <button onclick="location.href='withdrawal.html'">Go to Withdrawal</button>
-      <button onclick="location.href='setting.html'">Settings</button>
-    </div>
+    <!-- دیگر بٹنز (Ads بٹن کے بغیر) -->
+    <button onclick="window.location.href='activity.html'">
+      <i class="fas fa-clock"></i> Activity History
+    </button>
+    <button onclick="window.location.href='withdrawal.html'">
+      <i class="fas fa-wallet"></i> Withdrawal
+    </button>
+    <button onclick="window.location.href='index.html'">
+      <i class="fas fa-home"></i> Back to Home
+    </button>
   </div>
 
   <script>
-    // Load saved balance
-    let balance = parseFloat(localStorage.getItem('balance')) || 0.00;
-    document.getElementById('balance').innerText = `$${balance.toFixed(2)}`;
-
-    // Referral earnings
-    let referralEarnings = parseFloat(localStorage.getItem('referralEarnings')) || 0.00;
-    document.getElementById('referralEarnings').innerText = `$${referralEarnings.toFixed(2)}`;
-
-    // Watch Ad button click
-    document.getElementById('watchAdBtn').addEventListener('click', () => {
-      // Earning increase
-      balance += 0.15;
-      localStorage.setItem('balance', balance.toFixed(2));
-      document.getElementById('balance').innerText = `$${balance.toFixed(2)}`;
-
-      // Open ad page
-      window.open('ad.html', '_blank');
+    // ڈیش بورڈ ڈیٹا لوڈ کریں
+    document.addEventListener("DOMContentLoaded", function() {
+      const coins = parseInt(localStorage.getItem("coins") || "0");
+      const earnings = parseFloat(localStorage.getItem("goldEarnings") || "0");
+      const user = localStorage.getItem("loggedInUser");
+      const referrals = localStorage.getItem(`referralCount_${user}`) || "0";
+      
+      document.getElementById("dashCoins").innerText = `Total Coins: ${coins}`;
+      document.getElementById("dashEarnings").innerText = `Total Earnings: $${earnings.toFixed(2)}`;
+      document.getElementById("dashReferrals").innerText = `Your Referrals: ${referrals}`;
     });
   </script>
 </body>
