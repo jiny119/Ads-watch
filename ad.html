@@ -107,8 +107,10 @@
         return;
       }
 
-      const randomLink = adLinks[Math.floor(Math.random() * adLinks.length)];
-      window.open(randomLink, "_blank");
+      // 🔹 باری باری ویڈیوز چلانے والا system
+      const currentIndex = data.count % adLinks.length;
+      const selectedLink = adLinks[currentIndex];
+      window.open(selectedLink, "_blank");
 
       data.count += 1;
       data.balance = (data.balance || 0) + rewardPerAd;
