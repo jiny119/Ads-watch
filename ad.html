@@ -56,6 +56,12 @@
       margin-top: 10px;
       color: #b22222;
     }
+
+    #currentAd {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #1e90ff;
+    }
   </style>
 </head>
 <body>
@@ -65,6 +71,7 @@
     <button onclick="watchAd()">Watch Ad</button>
     <p id="balance">$0.00</p>
     <p id="adsLeft"></p>
+    <p id="currentAd"></p>
   </div>
 
   <script>
@@ -111,6 +118,9 @@
       const currentIndex = data.count % adLinks.length;
       const selectedLink = adLinks[currentIndex];
       window.open(selectedLink, "_blank");
+
+      // 🔹 یہ لائن دکھائے گی کونسی ویڈیو چل رہی ہے
+      document.getElementById("currentAd").textContent = `Now Playing Ad ${currentIndex + 1} of ${adLinks.length}`;
 
       data.count += 1;
       data.balance = (data.balance || 0) + rewardPerAd;
